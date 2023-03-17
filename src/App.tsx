@@ -1,9 +1,9 @@
 import "./App.css";
-import Header from "./components/Header";
-import GridContainer from "./components/GridContainer";
-import TecladoVirtual from "./components/TecladoVirtual";
-import ModalInstrucciones from "./components/ModalInstrucciones";
-import ModalStats from "./components/ModalStats";
+import Header from "./components/main/Header";
+import GridContainer from "./components/main/GridContainer";
+import TecladoVirtual from "./components/main/TecladoVirtual";
+import ModalInstrucciones from "./components/modales/ModalInstrucciones";
+import ModalStats from "./components/modales/ModalStats";
 import { useEffect, useState } from "react";
 
 const App = () => {
