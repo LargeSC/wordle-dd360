@@ -19,9 +19,10 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: #f3f3f3;
-  border: 1px solid #000000;
+  background: var(--modal-back);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
+  color: var(--text-color);
 }
 
 .modal-instrucciones h3 {
@@ -40,7 +41,7 @@
 .btn-jugar {
   width: 8.2rem;
   height: 1.6rem;
-  background-color: #6aaa64;
+  background-color: var(--accent-color);
   color: #fff;
   border-radius: 0.25rem;
   font-size: 1rem;

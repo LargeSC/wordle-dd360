@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: var(--modal-shade);
 }
 
 .main-container {
@@ -10,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 566px;
-  width: 512px;
-  background-color: #f9f9f9;
+  height: 35.4rem;
+  width: 32rem;
+  background-color: var(--background);
 }

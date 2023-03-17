@@ -21,9 +21,9 @@
 }
 
 .item-instr {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
+  background-color: var(--item-instr-back);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
 }
 
 .letra-correcta {

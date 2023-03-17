@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(243, 243, 243, 0.89);
+  background: var(--modal-shade);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,9 +19,10 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: #f3f3f3;
-  border: 1px solid #000000;
+  background: var(--modal-back);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
+  color: var(--text-color);
 }
 
 h3 {
@@ -78,7 +79,7 @@ p {
 .btn-modal {
   width: 8.2rem;
   height: 1.6rem;
-  background-color: #6aaa64;
+  background-color: var(--accent-color);
   color: #fff;
   border-radius: 0.25rem;
   font-size: 1rem;

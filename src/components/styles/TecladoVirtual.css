@@ -6,8 +6,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(218, 220, 224, 0.3);
+  background: var(--background-shaded);
   margin-bottom: 5rem;
+  border-radius: 0.5rem;
 }
 
 .fila-teclas {
@@ -26,7 +27,7 @@
 .tecla {
   width: 1.4rem;
   height: 1.6rem;
-  background: #d3d6da;
+  background: var(--tecla-back);
   border-radius: 0.125rem;
   font-size: 0.75rem;
   font-weight: 700;
@@ -34,7 +35,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #56575e;
+  color: var(--tecla-text);
   cursor: pointer;
 }
 .tecla:hover {
