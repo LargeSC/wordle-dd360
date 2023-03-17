@@ -4,11 +4,25 @@ import GridContainer from "./components/GridContainer";
 import TecladoVirtual from "./components/TecladoVirtual";
 import ModalInstrucciones from "./components/ModalInstrucciones";
 import ModalStats from "./components/ModalStats";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const [isModalInstrOpen, setIsModalInstrOpen] = useState<boolean>(false);
   const [isModalStatsOpen, setIsModalStatsOpen] = useState<boolean>(false);
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setIsModalInstrOpen(false);
+      setIsModalStatsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="App">
