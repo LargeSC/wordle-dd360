@@ -1,0 +1,43 @@
+.teclado-virtual {
+  width: 20rem;
+  height: 7.5rem;
+  padding: 1rem 1.125rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(218, 220, 224, 0.3);
+  margin-bottom: 5rem;
+}
+
+.fila-teclas {
+  display: flex;
+  gap: 0.225rem;
+  margin-bottom: 0.225rem;
+}
+
+.teclado-virtual div:nth-child(2) {
+  align-self: flex-end;
+}
+.teclado-virtual div:nth-child(3) {
+  align-self: flex-start;
+}
+
+.tecla {
+  width: 1.4rem;
+  height: 1.6rem;
+  background: #d3d6da;
+  border-radius: 0.125rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #56575e;
+}
+
+.large-tecla {
+  width: 2.25rem;
+  font-size: 0.5rem;
+}
