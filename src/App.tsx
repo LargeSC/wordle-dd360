@@ -25,7 +25,9 @@ const App = () => {
           closeInstrModal={() => setIsModalInstrOpen(false)}
         />
       )}
-      {isModalStatsOpen && <ModalStats />}
+      {isModalStatsOpen && (
+        <ModalStats closeStatsModal={() => setIsModalStatsOpen(false)} />
+      )}
     </div>
   );
 };
