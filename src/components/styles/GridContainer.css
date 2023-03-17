@@ -6,7 +6,7 @@
 
 .grid-item {
   background-color: rgba(147, 155, 159, 0.3);
-  color: white;
+  color: #fff;
   text-align: center;
   border-radius: 0.25rem;
   height: 2.375rem;
@@ -17,16 +17,26 @@
   align-items: center;
   font-size: 1.25rem;
   font-weight: 700;
+  text-transform: uppercase;
+}
+
+.item-instr {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
 }
 
 .letra-correcta {
   background-color: #66a060;
+  border: unset;
 }
 
 .letra-misplaced {
   background-color: #ceb02c;
+  border: unset;
 }
 
 .letra-erronea {
   background-color: #939b9f;
+  border: unset;
 }

@@ -7,17 +7,24 @@ import ModalStats from "./components/ModalStats";
 import { useState } from "react";
 
 const App = () => {
-  const [isModalInstrOpen, setIsModalInstrOpen] = useState(false);
-  const [isModalStatsOpen, setIsModalStatsOpen] = useState(false);
+  const [isModalInstrOpen, setIsModalInstrOpen] = useState<boolean>(false);
+  const [isModalStatsOpen, setIsModalStatsOpen] = useState<boolean>(false);
 
   return (
     <div className="App">
       <div className="main-container">
-        <Header />
+        <Header
+          openInstrModal={() => setIsModalInstrOpen(true)}
+          openStatsModal={() => setIsModalStatsOpen((prevState) => !prevState)}
+        />
         <GridContainer rows={5} cols={5} />
         <TecladoVirtual />
       </div>
-      {isModalInstrOpen && <ModalInstrucciones />}
+      {isModalInstrOpen && (
+        <ModalInstrucciones
+          closeInstrModal={() => setIsModalInstrOpen(false)}
+        />
+      )}
       {isModalStatsOpen && <ModalStats />}
     </div>
   );

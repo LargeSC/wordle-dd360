@@ -35,6 +35,11 @@
   justify-content: center;
   align-items: center;
   color: #56575e;
+  cursor: pointer;
+}
+.tecla:hover {
+  scale: 1.1;
+  transition: scale 0.2s ease;
 }
 
 .large-tecla {
