@@ -1,0 +1,32 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.grid-item {
+  background-color: rgba(147, 155, 159, 0.3);
+  color: white;
+  text-align: center;
+  border-radius: 0.25rem;
+  height: 2.375rem;
+  width: 2.375rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.letra-correcta {
+  background-color: #66a060;
+}
+
+.letra-misplaced {
+  background-color: #ceb02c;
+}
+
+.letra-erronea {
+  background-color: #939b9f;
+}

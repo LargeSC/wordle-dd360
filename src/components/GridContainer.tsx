@@ -1,4 +1,5 @@
 import { FC } from "react";
+import "./styles/GridContainer.css";
 
 interface GridContainerProps {
   rows: number;
@@ -8,7 +9,31 @@ interface GridContainerProps {
 const GridContainer: FC<GridContainerProps> = ({ rows, cols }) => {
   return (
     <div className="grid-container">
-      <h1>Rows</h1>
+      <div className="grid-item letra-correcta">A</div>
+      <div className="grid-item letra-misplaced">A</div>
+      <div className="grid-item letra-erronea">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
+      <div className="grid-item">A</div>
     </div>
   );
 };
