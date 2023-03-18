@@ -23,21 +23,24 @@ const TecladoVirtual: FC<TecladoVirtualProps> = ({
       {teclas.map((fila, index) => {
         return (
           <div className="fila-teclas" key={`fila${index}`}>
-            {fila.map((letra) => {
-              if (letra.length === 1) {
+            {fila.map((tecla) => {
+              if (tecla.length === 1) {
+                const estado = letras.find(
+                  (letra) => letra.valor === tecla
+                )?.estado;
                 return (
                   <div
-                    key={letra}
-                    className="tecla"
-                    onClick={() => handleClickKey(letra)}
+                    key={tecla}
+                    className={`tecla ${estado ? `tecla-${estado}` : ""}`}
+                    onClick={() => handleClickKey(tecla)}
                   >
-                    {letra}
+                    {tecla}
                   </div>
                 );
-              } else if (letra === "DEL") {
+              } else if (tecla === "DEL") {
                 return (
                   <div
-                    key={letra}
+                    key={tecla}
                     className="tecla large-tecla"
                     onClick={handleDelete}
                   >
@@ -56,12 +59,9 @@ const TecladoVirtual: FC<TecladoVirtualProps> = ({
                 );
               } else {
                 return (
-                  <div
-                    key={letra}
-                    className="tecla large-tecla"
-                    onClick={() => handleClickKey(letra)}
-                  >
-                    {letra}
+                  // Este es el caso de ENTER, no hay accion con Click
+                  <div key={tecla} className="tecla large-tecla">
+                    {tecla}
                   </div>
                 );
               }

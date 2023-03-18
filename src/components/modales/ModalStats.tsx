@@ -5,9 +5,9 @@ interface ModalStatsProps {
   closeStatsModal: () => void;
   juegosPlayed: number;
   juegosWon: number;
-  timer: string;
+  timer: number;
   showPalabraSecreta: boolean;
-  palabraSecreta: string;
+  palabrasSecretas: string[];
 }
 
 const ModalStats: FC<ModalStatsProps> = ({
@@ -16,8 +16,11 @@ const ModalStats: FC<ModalStatsProps> = ({
   juegosWon,
   timer,
   showPalabraSecreta,
-  palabraSecreta,
+  palabrasSecretas,
 }) => {
+  const minutos = Math.floor(timer / 60);
+  const segundos = timer % 60;
+
   return (
     <div className="container-modal">
       <div className="modal-stats">
@@ -36,13 +39,16 @@ const ModalStats: FC<ModalStatsProps> = ({
 
         {showPalabraSecreta && (
           <p>
-            La palabra era <strong>{palabraSecreta}</strong>
+            La palabra era{" "}
+            <strong>{palabrasSecretas[palabrasSecretas.length - 2]}</strong>
           </p>
         )}
 
         <div className="timer-container">
           <p className="timer-txt">SIGUIENTE PALABRA</p>
-          <p className="timer-num">{timer}</p>
+          <p className="timer-num">
+            {minutos}:{segundos < 10 ? `0${segundos}` : segundos}
+          </p>
         </div>
 
         <div className="btn-modal" onClick={closeStatsModal}>
