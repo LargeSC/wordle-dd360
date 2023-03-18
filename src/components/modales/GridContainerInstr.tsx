@@ -1,5 +1,5 @@
 import { FC } from "react";
-import "./styles/GridContainer.css";
+import "../main/styles/GridContainer.css";
 
 interface GridContainerInstrProps {
   palabra: string;

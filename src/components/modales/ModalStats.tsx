@@ -3,15 +3,21 @@ import "./styles/ModalStats.css";
 
 interface ModalStatsProps {
   closeStatsModal: () => void;
+  juegosPlayed: number;
+  juegosWon: number;
+  timer: string;
+  showPalabraSecreta: boolean;
+  palabraSecreta: string;
 }
 
-const ModalStats: FC<ModalStatsProps> = ({ closeStatsModal }) => {
-  const juegosPlayed = 10;
-  const juegosWon = 5;
-  const showPalabraSecreta = false;
-  const palabraSecreta = "PERRO";
-  const timer = "4:01";
-
+const ModalStats: FC<ModalStatsProps> = ({
+  closeStatsModal,
+  juegosPlayed,
+  juegosWon,
+  timer,
+  showPalabraSecreta,
+  palabraSecreta,
+}) => {
   return (
     <div className="container-modal">
       <div className="modal-stats">

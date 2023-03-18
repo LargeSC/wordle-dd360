@@ -1,39 +1,29 @@
 import { FC } from "react";
+import { LetraInterface } from "../../App";
 import "./styles/GridContainer.css";
 
 interface GridContainerProps {
-  rows: number;
-  cols: number;
+  letras: LetraInterface[];
 }
 
-const GridContainer: FC<GridContainerProps> = ({ rows, cols }) => {
+const GridContainer: FC<GridContainerProps> = ({ letras }) => {
+  const espaciosGrid = new Array(25 - letras.length).fill("");
+
   return (
     <div className="grid-container">
-      <div className="grid-item letra-correcta">A</div>
-      <div className="grid-item letra-misplaced">H</div>
-      <div className="grid-item letra-erronea">O</div>
-      <div className="grid-item letra-erronea">R</div>
-      <div className="grid-item letra-misplaced">A</div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
-      <div className="grid-item"></div>
+      {letras.map((item, i) => (
+        <div
+          className={`grid-item letra-${item.estado}`}
+          key={`grid-item-${i}`}
+        >
+          {item.valor}
+        </div>
+      ))}
+      {espaciosGrid.map((item, i) => (
+        <div className="grid-item" key={`grid-espacio-${i}`}>
+          {item}
+        </div>
+      ))}
     </div>
   );
 };
