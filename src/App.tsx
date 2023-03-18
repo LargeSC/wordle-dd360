@@ -22,7 +22,7 @@ export interface LetraInterface {
 }
 
 const TIEMPO_MAX = 300; // 5 minutos
-const JUEGO_FACIL = true;
+const JUEGO_FACIL = true; // Posible feature extra, toggle entre modo facil y dificil
 const diccionario = JUEGO_FACIL ? palabrasFaciles5L : diccionario5L;
 
 const App = () => {

@@ -1,5 +1,11 @@
 # HELLO WORDLe :)
 
+Equipo DD360, 
+Me divirtió mucho haber trabajado en este challenge. Muchas gracias por tomarse el tiempo de revisar mi código y de compartirme cualquier feedback. 
+Espero tener oportunidad de hablar pronto.
+Saludos!
+Santi
+
 Instrucciones challenge:
 ✓1. Maquetar el siguiente figma (https://www.figma.com/file/1ItfWDdmg93m4yfj0BAvCn/DD3-Worlde?node-id=0%3A1)
 Se compone de 3 vistas. Una donde muestra las instrucciones del juego, otra donde muestra el tablero del juego y la última, donde encontramos el resultado del juego
