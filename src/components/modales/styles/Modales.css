@@ -13,7 +13,7 @@
 
 .modal-instrucciones {
   width: 17rem;
-  height: 31.75rem;
+  min-height: 31.75rem;
   padding: 1.3rem;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,7 @@
 
 .modal-stats {
   width: 17rem;
-  height: 17rem;
+  min-height: 17rem;
   padding: 1.3rem;
   display: flex;
   flex-direction: column;
