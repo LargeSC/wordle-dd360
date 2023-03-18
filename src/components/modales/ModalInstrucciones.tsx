@@ -1,6 +1,6 @@
 import { FC } from "react";
 import GridContainerInstr from "./GridContainerInstr";
-import "./styles/ModalInstrucciones.css";
+import "./styles/Modales.css";
 
 interface ModalInstruccionesProps {
   closeInstrModal: () => void;
@@ -57,7 +57,7 @@ const ModalInstrucciones: FC<ModalInstruccionesProps> = ({
           </p>
           <p className="center-text">¡Una palabra nueva cada 5 minutos!</p>
         </div>
-        <div className="btn-jugar" onClick={closeInstrModal}>
+        <div className="btn-modal" onClick={closeInstrModal}>
           !JUGAR¡
         </div>
       </div>

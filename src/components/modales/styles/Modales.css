@@ -11,6 +11,20 @@
   z-index: 10;
 }
 
+.modal-instrucciones {
+  width: 17rem;
+  height: 31.75rem;
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--modal-back);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  color: var(--text-color);
+}
+
 .modal-stats {
   width: 17rem;
   height: 17rem;
@@ -32,6 +46,10 @@ h3 {
 
 p {
   font-size: 0.6rem;
+}
+
+.center-text {
+  text-align: center;
 }
 
 .stats-container {
@@ -56,10 +74,6 @@ p {
   margin: 0;
 }
 
-.center-text {
-  text-align: center;
-}
-
 .timer-container {
   display: flex;
   flex-direction: column;
@@ -74,6 +88,25 @@ p {
   font-size: 0.75rem;
   font-weight: 700;
   margin: 0.25rem;
+}
+
+.btn-jugar {
+  width: 8.2rem;
+  height: 1.6rem;
+  background-color: var(--accent-color);
+  color: #fff;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-jugar:hover {
+  scale: 1.1;
+  transition: scale 0.2s ease;
 }
 
 .btn-modal {

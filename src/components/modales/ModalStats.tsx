@@ -1,5 +1,5 @@
 import { FC } from "react";
-import "./styles/ModalStats.css";
+import "./styles/Modales.css";
 
 interface ModalStatsProps {
   closeStatsModal: () => void;
