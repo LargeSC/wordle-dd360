@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useRef, useState } from "react";
 import easyWordsCatalogue from "./constants/easyWordsCatalogue";
 import allWordsCatalogue from "./constants/allWordsCatalogue";
@@ -8,6 +9,7 @@ import Instructions from "./components/Instructions";
 import Modal from "./components/Modal";
 import Stats from "./components/Stats";
 import styled from "styled-components";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 export type LetterStateType = "correct" | "wrong" | "misplaced" | "";
 
@@ -47,13 +49,22 @@ const IS_EASY_GAME = true; // Possible extra feature, toggle between hard and ea
 const dictionary = IS_EASY_GAME ? easyWordsCatalogue : allWordsCatalogue;
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+  const [gamesPlayed, setGamesPlayed] = useLocalStorage<number>("games", 0);
+  const [gamesWon, setGamesWon] = useLocalStorage<number>("gamesWon", 0);
+  const [isDarkMode, setIsDarkMode] = useLocalStorage<boolean>(
+    "darkMode",
+    false
+  );
+  const [secretWords, setSecretWords] = useLocalStorage<string[]>(
+    "secretWords",
+    []
+  );
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(
+    gamesPlayed > 0 ? false : true
+  );
   const [modalType, setModalType] = useState<ModalType>("instructions");
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-  const [gamesPlayed, setGamesPlayed] = useState<number>(0);
-  const [gamesWon, setGamesWon] = useState<number>(0);
   const [letters, setLetters] = useState<LetterInterface[]>([]);
-  const [secretWords, setSecretWords] = useState<string[]>([]);
   const [showSecretWord, setShowSecretWord] = useState<boolean>(false);
   const [timer, setTimer] = useState(MAX_TIME);
   const [isFinished, setIsFinished] = useState<boolean>(false);
@@ -168,7 +179,6 @@ const App = () => {
 
   useEffect(() => {
     initGame();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
