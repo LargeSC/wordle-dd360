@@ -16,13 +16,14 @@ const HeaderContainer = styled.div`
   padding: 0.75rem;
   border-radius: 0.5rem;
   height: 3rem;
-  width: 20rem;
+  max-width: 20rem;
+  min-width: 16rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: 0.75rem;
-  margin-top: 2.5rem;
+  margin: 2.5rem 0.75rem 0 0.75rem;
 `;
 
 const HeaderIcon = styled.img`

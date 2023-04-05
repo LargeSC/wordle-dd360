@@ -19,11 +19,13 @@ const KeyboardContainer = styled.div`
   margin-bottom: 5rem;
   border-radius: 0.5rem;
 
-  & div:nth-child(2) {
-    align-self: flex-end;
-  }
-  & div:nth-child(3) {
-    align-self: flex-start;
+  @media (min-width: 768px) {
+    & div:nth-child(2) {
+      align-self: flex-end;
+    }
+    & div:nth-child(3) {
+      align-self: flex-start;
+    }
   }
 `;
 
@@ -63,6 +65,12 @@ const Key = styled.div`
   &.key-wrong {
     background-color: #818181;
   }
+
+  @media (max-width: 768px) {
+    width: 1.6rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
 `;
 
 const LargeKey = styled(Key)`
@@ -71,6 +79,10 @@ const LargeKey = styled(Key)`
 
   & path {
     fill: var(--key-text);
+  }
+  @media (max-width: 768px) {
+    width: 2.5rem;
+    font-size: 0.65rem;
   }
 `;
 

@@ -32,6 +32,9 @@ const AppContainer = styled.div`
   justify-content: center;
   height: 100vh;
   background-color: var(--modal-shade);
+  @media (max-width: 768px) {
+    background-color: var(--background);
+  }
 `;
 
 const MainContainer = styled.div`

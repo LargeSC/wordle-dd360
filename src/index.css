@@ -5,6 +5,7 @@
 }
 
 :root {
+  font-size: 20px;
   --background: #f9f9f9;
   --background-shaded: #f3f3f3;
   --modal-back: #f3f3f3;
@@ -47,6 +48,6 @@ code {
 
 @media (min-width: 768px) {
   :root {
-    font-size: 20px;
+    font-size: 24px;
   }
 }
