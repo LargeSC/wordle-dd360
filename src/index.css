@@ -14,8 +14,8 @@
   --border-color: #000;
   --accent-color: #6aaa64;
   --item-instr-back: #fff;
-  --tecla-back: #d3d6da;
-  --tecla-text: #56575e;
+  --key-back: #d3d6da;
+  --key-text: #56575e;
 }
 
 [data-theme="dark"] {
@@ -28,8 +28,8 @@
   --border-color: #939b9f;
   --accent-color: #6aaa64;
   --item-instr-back: #262b3c;
-  --tecla-back: #565f7e;
-  --tecla-text: #fff;
+  --key-back: #565f7e;
+  --key-text: #fff;
 }
 
 body {

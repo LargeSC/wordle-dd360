@@ -26,17 +26,17 @@
   border: 1px solid var(--border-color);
 }
 
-.letra-correcta {
+.letter-correct {
   background-color: #66a060;
   border: unset;
 }
 
-.letra-misplaced {
+.letter-misplaced {
   background-color: #ceb02c;
   border: unset;
 }
 
-.letra-erronea {
+.letter-wrong {
   background-color: #939b9f;
   border: unset;
 }

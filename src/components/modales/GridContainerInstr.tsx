@@ -1,35 +1,36 @@
 import { FC } from "react";
+import { LetterStateType } from "../../App";
 import "../main/styles/GridContainer.css";
 
 interface GridContainerInstrProps {
-  palabra: string;
-  letraEspecial: string;
-  tipoEspecial: "correcta" | "erronea" | "misplaced";
+  word: string;
+  specialLetter: string;
+  specialType: LetterStateType;
 }
 
 const GridContainerInstr: FC<GridContainerInstrProps> = ({
-  palabra,
-  letraEspecial,
-  tipoEspecial,
+  word,
+  specialLetter,
+  specialType,
 }) => {
-  const letras = palabra.split("");
+  const letters = word.split("");
 
   return (
     <div className="grid-container">
-      {letras.map((letra, index) => {
-        if (letra === letraEspecial) {
+      {letters.map((letter, index) => {
+        if (letter === specialLetter) {
           return (
             <div
               key={index}
-              className={`grid-item letra-${tipoEspecial} item-instr`}
+              className={`grid-item key-${specialType} item-instr`}
             >
-              {letra}
+              {letter}
             </div>
           );
         } else {
           return (
             <div key={index} className="grid-item item-instr">
-              {letra}
+              {letter}
             </div>
           );
         }

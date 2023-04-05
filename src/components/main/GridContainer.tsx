@@ -1,26 +1,26 @@
 import { FC } from "react";
-import { LetraInterface } from "../../App";
+import { LetterInterface } from "../../App";
 import "./styles/GridContainer.css";
 
 interface GridContainerProps {
-  letras: LetraInterface[];
+  letters: LetterInterface[];
 }
 
-const GridContainer: FC<GridContainerProps> = ({ letras }) => {
-  const espaciosGrid = new Array(25 - letras.length).fill("");
+const GridContainer: FC<GridContainerProps> = ({ letters }) => {
+  const gridAvailableSpots = new Array(25 - letters.length).fill("");
 
   return (
     <div className="grid-container">
-      {letras.map((item, i) => (
+      {letters.map((letter, i) => (
         <div
-          className={`grid-item letra-${item.estado}`}
+          className={`grid-item letter-${letter.state}`}
           key={`grid-item-${i}`}
         >
-          {item.valor}
+          {letter.value}
         </div>
       ))}
-      {espaciosGrid.map((item, i) => (
-        <div className="grid-item" key={`grid-espacio-${i}`}>
+      {gridAvailableSpots.map((item, i) => (
+        <div className="grid-item" key={`grid-spot-${i}`}>
           {item}
         </div>
       ))}

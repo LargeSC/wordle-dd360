@@ -1,4 +1,4 @@
-.teclado-virtual {
+.virtual-keyboard {
   width: 20rem;
   height: 7.5rem;
   padding: 1rem 1.125rem;
@@ -11,23 +11,23 @@
   border-radius: 0.5rem;
 }
 
-.fila-teclas {
+.keyboard-row {
   display: flex;
   gap: 0.225rem;
   margin-bottom: 0.225rem;
 }
 
-.teclado-virtual div:nth-child(2) {
+.virtual-keyboard div:nth-child(2) {
   align-self: flex-end;
 }
-.teclado-virtual div:nth-child(3) {
+.virtual-keyboard div:nth-child(3) {
   align-self: flex-start;
 }
 
-.tecla {
+.key {
   width: 1.4rem;
   height: 1.6rem;
-  background: var(--tecla-back);
+  background: var(--key-back);
   border-radius: 0.125rem;
   font-size: 0.75rem;
   font-weight: 700;
@@ -35,36 +35,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--tecla-text);
+  color: var(--key-text);
   cursor: pointer;
 }
-.tecla:hover {
+.key:hover {
   scale: 1.1;
   transition: scale 0.2s ease;
 }
 
-.large-tecla {
+.large-key {
   width: 2.25rem;
   font-size: 0.5rem;
 }
 
-.tecla-delete path {
-  fill: var(--tecla-text);
+.key-delete path {
+  fill: var(--key-text);
 }
 
-.tecla-correcta {
+.key-correct {
   background-color: #66a060;
   color: #fff;
   border: unset;
 }
 
-.tecla-misplaced {
+.key-misplaced {
   background-color: #ceb02c;
   color: #fff;
   border: unset;
 }
 
-.tecla-erronea {
+.key-wrong {
   background-color: #818181;
   color: #fff;
   border: unset;

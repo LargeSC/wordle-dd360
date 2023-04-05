@@ -1,4 +1,4 @@
-export const palabrasFaciles5L = [
+const easyWordsCatalogue = [
   "calor",
   "campo",
   "canto",
@@ -149,10 +149,4 @@ export const palabrasFaciles5L = [
   "rayos",
 ];
 
-// function quitarAcentos(palabra) {
-//   return palabra.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-// }
-
-// export const palabrasFaciles5L = palabrasFaciles
-//   .filter((palabra) => palabra.length === 5)
-//   .map((palabra) => quitarAcentos(palabra));
+export default easyWordsCatalogue;

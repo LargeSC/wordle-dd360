@@ -3,23 +3,23 @@ import "./styles/Modales.css";
 
 interface ModalStatsProps {
   closeStatsModal: () => void;
-  juegosPlayed: number;
-  juegosWon: number;
+  gamesPlayed: number;
+  gamesWon: number;
   timer: number;
-  showPalabraSecreta: boolean;
-  palabrasSecretas: string[];
+  showSecretWord: boolean;
+  secretWords: string[];
 }
 
 const ModalStats: FC<ModalStatsProps> = ({
   closeStatsModal,
-  juegosPlayed,
-  juegosWon,
+  gamesPlayed,
+  gamesWon,
   timer,
-  showPalabraSecreta,
-  palabrasSecretas,
+  showSecretWord,
+  secretWords,
 }) => {
-  const minutos = Math.floor(timer / 60);
-  const segundos = timer % 60;
+  const timerMinutes = Math.floor(timer / 60);
+  const timerSeconds = timer % 60;
 
   return (
     <div className="container-modal">
@@ -28,26 +28,27 @@ const ModalStats: FC<ModalStatsProps> = ({
 
         <div className="stats-container">
           <div className="stats-item">
-            <p className="stats-num">{juegosPlayed}</p>
+            <p className="stats-num">{gamesPlayed}</p>
             <p>Jugadas</p>
           </div>
           <div className="stats-item">
-            <p className="stats-num">{juegosWon}</p>
+            <p className="stats-num">{gamesWon}</p>
             <p>Victorias</p>
           </div>
         </div>
 
-        {showPalabraSecreta && (
+        {showSecretWord && (
           <p>
             La palabra era{" "}
-            <strong>{palabrasSecretas[palabrasSecretas.length - 2]}</strong>
+            <strong>{secretWords[secretWords.length - 2]}</strong>
           </p>
         )}
 
         <div className="timer-container">
           <p className="timer-txt">SIGUIENTE PALABRA</p>
           <p className="timer-num">
-            {minutos}:{segundos < 10 ? `0${segundos}` : segundos}
+            {timerMinutes}:
+            {timerSeconds < 10 ? `0${timerSeconds}` : timerSeconds}
           </p>
         </div>
 

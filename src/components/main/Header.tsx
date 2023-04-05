@@ -7,6 +7,8 @@ interface HeaderProps {
   toggleTheme: () => void;
 }
 
+const PUBLIC = process.env.PUBLIC_URL;
+
 const Header: FC<HeaderProps> = ({
   openInstrModal,
   openStatsModal,
@@ -14,19 +16,19 @@ const Header: FC<HeaderProps> = ({
   toggleTheme,
 }) => {
   const togglerImgSrc = isDarkMode
-    ? "./toggle_switch_off.png"
-    : "./toggle_switch_on.png";
+    ? `${PUBLIC}/toggle_switch_off.png`
+    : `${PUBLIC}/toggle_switch_on.png`;
   return (
     <div className="header">
       <img
-        src="./icono_instrucciones.png"
+        src={`${PUBLIC}/instructions_icon.png`}
         alt="click para instrucciones del juego"
         onClick={openInstrModal}
       />
       <h1>WORDLE</h1>
       <div className="stats-button-group">
         <img
-          src="./icono_stats.png"
+          src={`${PUBLIC}/stats_icon.png`}
           alt="click para ver tus estadisticas"
           onClick={openStatsModal}
         />

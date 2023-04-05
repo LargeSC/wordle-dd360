@@ -1,80 +1,80 @@
 import "./App.css";
 import Header from "./components/main/Header";
 import GridContainer from "./components/main/GridContainer";
-import TecladoVirtual from "./components/main/TecladoVirtual";
+import VirtualKeyboard from "./components/main/VirtualKeyboard";
 import ModalInstrucciones from "./components/modales/ModalInstrucciones";
 import ModalStats from "./components/modales/ModalStats";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { palabrasFaciles5L } from "./constants/palabrasFaciles";
-import diccionario5L from "./constants/diccionario";
+import easyWordsCatalogue from "./constants/easyWordsCatalogue";
+import allWordsCatalogue from "./constants/allWordsCatalogue";
 
-type EstadoLetraType = "correcta" | "erronea" | "misplaced" | "";
+export type LetterStateType = "correct" | "wrong" | "misplaced" | "";
 
-enum EstadoLetra {
-  correcta = "correcta",
-  erronea = "erronea",
+enum LetterStateEnum {
+  correct = "correct",
+  wrong = "wrong",
   misplaced = "misplaced",
-  none = "",
+  unchecked = "",
 }
-export interface LetraInterface {
-  valor: string;
-  estado: EstadoLetraType;
+export interface LetterInterface {
+  value: string;
+  state: LetterStateType;
 }
 
-const TIEMPO_MAX = 300; // 5 minutos
-const JUEGO_FACIL = true; // Posible feature extra, toggle entre modo facil y dificil
-const diccionario = JUEGO_FACIL ? palabrasFaciles5L : diccionario5L;
+const MAX_TIME = 300; // 5 minutes
+const IS_EASY_GAME = true; // Possible extra feature, toggle between hard and easy level
+const dictionary = IS_EASY_GAME ? easyWordsCatalogue : allWordsCatalogue;
 
 const App = () => {
   const [isModalInstrOpen, setIsModalInstrOpen] = useState<boolean>(true);
   const [isModalStatsOpen, setIsModalStatsOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-  const [juegosPlayed, setJuegosPlayed] = useState<number>(0);
-  const [juegosWon, setJuegosWon] = useState<number>(0);
-  const [letras, setLetras] = useState<LetraInterface[]>([]);
-  const [palabrasSecretas, setPalabrasSecretas] = useState<string[]>([]);
-  const [showPalabraSecreta, setShowPalabraSecreta] = useState<boolean>(false);
-  const [timer, setTimer] = useState(TIEMPO_MAX);
+  const [gamesPlayed, setGamesPlayed] = useState<number>(0);
+  const [gamesWon, setGamesWon] = useState<number>(0);
+  const [letters, setLetters] = useState<LetterInterface[]>([]);
+  const [secretWords, setSecretWords] = useState<string[]>([]);
+  const [showSecretWord, setShowSecretWord] = useState<boolean>(false);
+  const [timer, setTimer] = useState(MAX_TIME);
   const [isFinished, setIsFinished] = useState<boolean>(false);
-  const palabraSecretaRef = useRef("");
+  const secretWordRef = useRef("");
 
-  const iniciaJuego = useCallback(() => {
+  const initGame = useCallback(() => {
     setIsFinished(false);
-    setTimer(TIEMPO_MAX);
-    const palabraRandom =
-      diccionario[Math.floor(Math.random() * diccionario.length)].toUpperCase();
-    if (!palabrasSecretas.includes(palabraRandom)) {
-      setPalabrasSecretas((prevPalabras) => [...prevPalabras, palabraRandom]);
-      palabraSecretaRef.current = palabraRandom;
-      setLetras([]);
+    setTimer(MAX_TIME);
+    const randomWord =
+      dictionary[Math.floor(Math.random() * dictionary.length)].toUpperCase();
+    if (!secretWords.includes(randomWord)) {
+      setSecretWords((prevWords) => [...prevWords, randomWord]);
+      secretWordRef.current = randomWord;
+      setLetters([]);
     } else {
-      // En caso de que ya exista la palabra en el array, se vuelve a llamar a la función, evitando repetidas.
-      iniciaJuego();
+      // In case the word has been used already restart to avoid duplicates.
+      initGame();
     }
-  }, [palabrasSecretas]);
+  }, [secretWords]);
 
-  const handleGanar = useCallback(() => {
-    setJuegosWon((prevJuegosWon) => prevJuegosWon + 1);
-    setJuegosPlayed((prevJuegosPlayed) => prevJuegosPlayed + 1);
+  const handleWin = useCallback(() => {
+    setGamesWon((prevGamesWon) => prevGamesWon + 1);
+    setGamesPlayed((prevGamesPlayed) => prevGamesPlayed + 1);
     setIsModalStatsOpen(true);
-    setShowPalabraSecreta(false);
+    setShowSecretWord(false);
     setIsFinished(true);
-    iniciaJuego();
-  }, [iniciaJuego]);
+    initGame();
+  }, [initGame]);
 
-  const handlePerder = useCallback(() => {
-    setJuegosPlayed((prevJuegosPlayed) => prevJuegosPlayed + 1);
+  const handleLose = useCallback(() => {
+    setGamesPlayed((prevGamesPlayed) => prevGamesPlayed + 1);
     setIsModalStatsOpen(true);
-    setShowPalabraSecreta(true);
+    setShowSecretWord(true);
     setIsFinished(true);
-    iniciaJuego();
-  }, [iniciaJuego]);
+    initGame();
+  }, [initGame]);
 
   const handleDelete = useCallback(() => {
-    if (letras.length % 5 !== 0) {
-      setLetras((prevLetras) => prevLetras.slice(0, prevLetras.length - 1));
+    if (letters.length % 5 !== 0) {
+      setLetters((prevLetters) => prevLetters.slice(0, prevLetters.length - 1));
     }
-  }, [letras]);
+  }, [letters]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -86,57 +86,60 @@ const App = () => {
         handleDelete();
       } else if (
         e.key.match(/^[a-zA-ZñÑ]$/) &&
-        letras.length < 25 &&
+        letters.length < 25 &&
         !isFinished
       ) {
-        setLetras((prevLetras) => [
-          ...prevLetras,
-          { valor: keyMay, estado: "" },
+        setLetters((prevLetters) => [
+          ...prevLetters,
+          { value: keyMay, state: "" },
         ]);
       }
     },
-    [handleDelete, isFinished, letras.length]
+    [handleDelete, isFinished, letters.length]
   );
 
   const handleClickKey = (keyMay: string) => {
-    if (letras.length < 25 && !isFinished) {
-      setLetras((prevLetras) => [...prevLetras, { valor: keyMay, estado: "" }]);
+    if (letters.length < 25 && !isFinished) {
+      setLetters((prevLetters) => [
+        ...prevLetters,
+        { value: keyMay, state: "" },
+      ]);
     }
   };
 
-  const checaPalabra = useCallback(
-    (palabraSecreta: string, letras: LetraInterface[]) => {
-      const newLetras = letras.map((letra, index) => {
-        if (letra.estado === EstadoLetra.none) {
-          if (letra.valor === palabraSecreta[index % 5]) {
-            return { ...letra, estado: EstadoLetra.correcta };
-          } else if (palabraSecreta.includes(letra.valor)) {
-            return { ...letra, estado: EstadoLetra.misplaced };
+  const checkWord = useCallback(
+    (secretWord: string, letters: LetterInterface[]) => {
+      const newLetras = letters.map((letter, index) => {
+        if (letter.state === LetterStateEnum.unchecked) {
+          if (letter.value === secretWord[index % 5]) {
+            return { ...letter, state: LetterStateEnum.correct };
+          } else if (secretWord.includes(letter.value)) {
+            return { ...letter, state: LetterStateEnum.misplaced };
           } else {
-            return { ...letra, estado: EstadoLetra.erronea };
+            return { ...letter, state: LetterStateEnum.wrong };
           }
         }
-        return letra;
+        return letter;
       });
-      setLetras(newLetras);
+      setLetters(newLetras);
 
-      // Toma unicamente las ultimas 5 letras y revisa si son correctas
-      let palabra = newLetras.slice(newLetras.length - 5, newLetras.length);
-      const isPalabraCorrecta = palabra.every(
-        (letra) => letra.estado === EstadoLetra.correcta
+      // Check the last 5 unchecked letters to see if word matches secret word
+      let word = newLetras.slice(newLetras.length - 5, newLetras.length);
+      const isWordCorrect = word.every(
+        (letra) => letra.state === LetterStateEnum.correct
       );
 
-      if (isPalabraCorrecta) {
-        handleGanar();
-      } else if (letras.length === 25) {
-        handlePerder();
+      if (isWordCorrect) {
+        handleWin();
+      } else if (letters.length === 25) {
+        handleLose();
       }
     },
-    [handleGanar, handlePerder]
+    [handleWin, handleLose]
   );
 
   useEffect(() => {
-    iniciaJuego();
+    initGame();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -146,25 +149,25 @@ const App = () => {
         if (prevTimer > 0) {
           return prevTimer - 1;
         } else {
-          setShowPalabraSecreta(false); // No queremos mostrar la nueva palabra secreta
-          iniciaJuego();
-          return TIEMPO_MAX;
+          setShowSecretWord(false);
+          initGame();
+          return MAX_TIME;
         }
       });
     }, 1000);
 
     return () => clearInterval(intervalo);
-  }, [iniciaJuego, isFinished]);
+  }, [initGame, isFinished]);
 
   useEffect(() => {
-    // Si es palabra completa y no se han hecho los checks aun, hazlos
+    // If word is 5 letters and checks haven't been performed, execute them
     if (
-      letras.length % 5 === 0 &&
-      letras.some((letra) => letra.estado === EstadoLetra.none)
+      letters.length % 5 === 0 &&
+      letters.some((letter) => letter.state === LetterStateEnum.unchecked)
     ) {
-      checaPalabra(palabraSecretaRef.current, letras);
+      checkWord(secretWordRef.current, letters);
     }
-  }, [letras, checaPalabra]);
+  }, [letters, checkWord]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -190,9 +193,9 @@ const App = () => {
           isDarkMode={isDarkMode}
           toggleTheme={() => setIsDarkMode((prevState) => !prevState)}
         />
-        <GridContainer letras={letras} />
-        <TecladoVirtual
-          letras={letras}
+        <GridContainer letters={letters} />
+        <VirtualKeyboard
+          letters={letters}
           handleClickKey={handleClickKey}
           handleDelete={handleDelete}
         />
@@ -204,12 +207,12 @@ const App = () => {
       )}
       {isModalStatsOpen && (
         <ModalStats
-          juegosPlayed={juegosPlayed}
-          juegosWon={juegosWon}
+          gamesPlayed={gamesPlayed}
+          gamesWon={gamesWon}
           closeStatsModal={() => setIsModalStatsOpen(false)}
-          showPalabraSecreta={showPalabraSecreta}
+          showSecretWord={showSecretWord}
           timer={timer}
-          palabrasSecretas={palabrasSecretas ? palabrasSecretas : []}
+          secretWords={secretWords ? secretWords : []}
         />
       )}
     </div>

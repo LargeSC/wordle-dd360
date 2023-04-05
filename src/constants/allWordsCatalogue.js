@@ -1,4 +1,4 @@
-const diccionario5L = [
+const allWordsCatalogue = [
   "abada",
   "abaja",
   "abaje",
@@ -7535,4 +7535,4 @@ const diccionario5L = [
   "verse",
 ];
 
-export default diccionario5L;
+export default allWordsCatalogue;

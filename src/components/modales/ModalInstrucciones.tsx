@@ -26,27 +26,27 @@ const ModalInstrucciones: FC<ModalInstruccionesProps> = ({
             <strong>Ejemplos</strong>
           </p>
           <GridContainerInstr
-            palabra="gatos"
-            letraEspecial="g"
-            tipoEspecial="correcta"
+            word="gatos"
+            specialLetter="g"
+            specialType="correct"
           />
           <p>
             La letra <strong>G</strong> está en la palabra y en la posición
             correcta.
           </p>
           <GridContainerInstr
-            palabra="vocal"
-            letraEspecial="c"
-            tipoEspecial="misplaced"
+            word="vocal"
+            specialLetter="c"
+            specialType="misplaced"
           />
           <p>
             La letra <strong>C</strong> está en la palabra pero en la posición
             incorrecta. correcta.
           </p>
           <GridContainerInstr
-            palabra="canto"
-            letraEspecial="o"
-            tipoEspecial="erronea"
+            word="canto"
+            specialLetter="o"
+            specialType="wrong"
           />
           <p>
             La letra <strong>O</strong> no está en la palabra.
