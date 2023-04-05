@@ -1,12 +1,13 @@
-import "./App.css";
-import Header from "./components/main/Header";
-import GridContainer from "./components/main/GridContainer";
-import VirtualKeyboard from "./components/main/VirtualKeyboard";
-import ModalInstrucciones from "./components/modales/ModalInstrucciones";
-import ModalStats from "./components/modales/ModalStats";
 import { useCallback, useEffect, useRef, useState } from "react";
 import easyWordsCatalogue from "./constants/easyWordsCatalogue";
 import allWordsCatalogue from "./constants/allWordsCatalogue";
+import Header from "./components/Header";
+import Grid from "./components/Grid";
+import VirtualKeyboard from "./components/VirtualKeyboard";
+import Instructions from "./components/Instructions";
+import Modal from "./components/Modal";
+import Stats from "./components/Stats";
+import styled from "styled-components";
 
 export type LetterStateType = "correct" | "wrong" | "misplaced" | "";
 
@@ -21,13 +22,33 @@ export interface LetterInterface {
   state: LetterStateType;
 }
 
+export type ModalType = "instructions" | "stats";
+
+const AppContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--modal-shade);
+`;
+
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 35.4rem;
+  width: 32rem;
+  background-color: var(--background);
+`;
+
 const MAX_TIME = 300; // 5 minutes
 const IS_EASY_GAME = true; // Possible extra feature, toggle between hard and easy level
 const dictionary = IS_EASY_GAME ? easyWordsCatalogue : allWordsCatalogue;
 
 const App = () => {
-  const [isModalInstrOpen, setIsModalInstrOpen] = useState<boolean>(true);
-  const [isModalStatsOpen, setIsModalStatsOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+  const [modalType, setModalType] = useState<ModalType>("instructions");
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [gamesPlayed, setGamesPlayed] = useState<number>(0);
   const [gamesWon, setGamesWon] = useState<number>(0);
@@ -56,7 +77,8 @@ const App = () => {
   const handleWin = useCallback(() => {
     setGamesWon((prevGamesWon) => prevGamesWon + 1);
     setGamesPlayed((prevGamesPlayed) => prevGamesPlayed + 1);
-    setIsModalStatsOpen(true);
+    setIsModalOpen(true);
+    setModalType("stats");
     setShowSecretWord(false);
     setIsFinished(true);
     initGame();
@@ -64,7 +86,8 @@ const App = () => {
 
   const handleLose = useCallback(() => {
     setGamesPlayed((prevGamesPlayed) => prevGamesPlayed + 1);
-    setIsModalStatsOpen(true);
+    setIsModalOpen(true);
+    setModalType("stats");
     setShowSecretWord(true);
     setIsFinished(true);
     initGame();
@@ -80,8 +103,7 @@ const App = () => {
     (e: KeyboardEvent) => {
       const keyMay = e.key.toUpperCase();
       if (e.key === "Escape") {
-        setIsModalInstrOpen(false);
-        setIsModalStatsOpen(false);
+        setIsModalOpen(false);
       } else if (e.key === "Backspace") {
         handleDelete();
       } else if (
@@ -107,9 +129,15 @@ const App = () => {
     }
   };
 
+  const handleOpenModal = (modalType: ModalType) => {
+    console.log("modalType:", modalType);
+    setModalType(modalType);
+    setIsModalOpen(true);
+  };
+
   const checkWord = useCallback(
     (secretWord: string, letters: LetterInterface[]) => {
-      const newLetras = letters.map((letter, index) => {
+      const newLetters = letters.map((letter, index) => {
         if (letter.state === LetterStateEnum.unchecked) {
           if (letter.value === secretWord[index % 5]) {
             return { ...letter, state: LetterStateEnum.correct };
@@ -121,12 +149,12 @@ const App = () => {
         }
         return letter;
       });
-      setLetters(newLetras);
+      setLetters(newLetters);
 
       // Check the last 5 unchecked letters to see if word matches secret word
-      let word = newLetras.slice(newLetras.length - 5, newLetras.length);
+      let word = newLetters.slice(newLetters.length - 5, newLetters.length);
       const isWordCorrect = word.every(
-        (letra) => letra.state === LetterStateEnum.correct
+        (letter) => letter.state === LetterStateEnum.correct
       );
 
       if (isWordCorrect) {
@@ -185,37 +213,38 @@ const App = () => {
   }, [isDarkMode]);
 
   return (
-    <div className="App">
-      <div className="main-container">
+    <AppContainer>
+      <MainContainer>
         <Header
-          openInstrModal={() => setIsModalInstrOpen(true)}
-          openStatsModal={() => setIsModalStatsOpen((prevState) => !prevState)}
+          openModal={handleOpenModal}
           isDarkMode={isDarkMode}
           toggleTheme={() => setIsDarkMode((prevState) => !prevState)}
         />
-        <GridContainer letters={letters} />
+        <Grid letters={letters} />
         <VirtualKeyboard
           letters={letters}
           handleClickKey={handleClickKey}
           handleDelete={handleDelete}
         />
-      </div>
-      {isModalInstrOpen && (
-        <ModalInstrucciones
-          closeInstrModal={() => setIsModalInstrOpen(false)}
-        />
-      )}
-      {isModalStatsOpen && (
-        <ModalStats
-          gamesPlayed={gamesPlayed}
-          gamesWon={gamesWon}
-          closeStatsModal={() => setIsModalStatsOpen(false)}
-          showSecretWord={showSecretWord}
-          timer={timer}
-          secretWords={secretWords ? secretWords : []}
-        />
-      )}
-    </div>
+      </MainContainer>
+      <Modal
+        shouldShow={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        {modalType === "instructions" ? (
+          <Instructions closeModal={() => setIsModalOpen(false)} />
+        ) : (
+          <Stats
+            gamesPlayed={gamesPlayed}
+            gamesWon={gamesWon}
+            closeModal={() => setIsModalOpen(false)}
+            showSecretWord={showSecretWord}
+            timer={timer}
+            secretWords={secretWords ? secretWords : []}
+          />
+        )}
+      </Modal>
+    </AppContainer>
   );
 };
 
